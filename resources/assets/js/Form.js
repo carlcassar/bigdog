@@ -16,19 +16,20 @@ $(function () {
 
         e.preventDefault();
 
-        let $ajaxMessages = $('#ajax-messages');
+        let $ajaxMessages = $('#ajax-messages'),
+            $form = e.currentTarget;
 
         $.ajax({
             url: "/",
             type: 'POST',
-            data: new FormData($(this)[0]),
+            data: new FormData($form),
             contentType: false,
             processData: false,
             beforeSend: () => $ajaxMessages.empty(),
             success: message => {
                 $ajaxMessages.append($('<div class="alert alert-success"></div>').append(message));
 
-                $(this)[0].reset();
+                $form.reset();
             },
             error: data => {
                 let errors = $('<div class="alert alert-danger"></div>');
