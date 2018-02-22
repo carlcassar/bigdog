@@ -1,7 +1,9 @@
+// Add padding to the container
 .container {
   padding: 30px 0;
 }
 
+// Add an asterix after required form-group inputs
 .form-group.required .control-label:after {
   content:"*";
   color:red;
