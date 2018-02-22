@@ -1,4 +1,4 @@
-#BigDog Test Project
+# BigDog Test Project
 
 This is a test project completed during a trial day interview. The requirements were to make a web form to collect some
 useful information. The form data is sent using AJAX but falls back to being a normal form when is disabled. The form 
