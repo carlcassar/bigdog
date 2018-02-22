@@ -47123,11 +47123,12 @@ if (false) {
 /***/ (function(module, exports) {
 
 $(function () {
+    var _this = this;
 
     $('.update-type').hide();
 
     $('.receive-updates').change(function () {
-        if ($('input[name="receive_updates"]:checked').val() === 'Yes') {
+        if ($('input[name="receive_updates"]:checked').val() === 'yes') {
             $(".update-type :input").prop('required', true);
             $('.update-type').show();
         } else {
@@ -47137,7 +47138,6 @@ $(function () {
     });
 
     $("#data-capture-form").submit(function (e) {
-        var _this = this;
 
         e.preventDefault();
 
@@ -47146,7 +47146,7 @@ $(function () {
         $.ajax({
             url: "/",
             type: 'POST',
-            data: new FormData($(this)[0]),
+            data: new FormData($(_this)[0]),
             contentType: false,
             processData: false,
             beforeSend: function beforeSend() {
@@ -47167,7 +47167,7 @@ $(function () {
                 $('#ajax-messages').append(errors);
             },
             complete: function complete() {
-                return $("html, body").animate({ scrollTop: 0 }, "slow");
+                return $('html, body').animate({ scrollTop: 0 }, 'slow');
             }
         });
     });

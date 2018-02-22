@@ -3,7 +3,7 @@ $(function () {
     $('.update-type').hide();
 
     $('.receive-updates').change(() => {
-        if ($('input[name="receive_updates"]:checked').val() === 'Yes') {
+        if ($('input[name="receive_updates"]:checked').val() === 'yes') {
             $(".update-type :input").prop('required', true);
             $('.update-type').show();
         } else {
@@ -12,7 +12,7 @@ $(function () {
         }
     });
 
-    $("#data-capture-form").submit(function (e) {
+    $("#data-capture-form").submit(e => {
 
         e.preventDefault();
 
@@ -26,7 +26,7 @@ $(function () {
             processData: false,
             beforeSend: () => $ajaxMessages.empty(),
             success: message => {
-                $ajaxMessages.append($('<div class="alert alert-success"></div>').append(message))
+                $ajaxMessages.append($('<div class="alert alert-success"></div>').append(message));
 
                 $(this)[0].reset();
             },
@@ -39,7 +39,7 @@ $(function () {
 
                 $('#ajax-messages').append(errors);
             },
-            complete: () => $("html, body").animate({scrollTop: 0}, "slow")
+            complete: () => $('html, body').animate({scrollTop: 0}, 'slow')
         });
     });
 });
