@@ -29,7 +29,7 @@ class StoreFormRequest extends FormRequest
             'email'                => 'required|email|max:100|unique:users',
             'address'              => 'required|min:2|max:100',
             'county'               => 'required|min:2|max:100',
-            'selfie'               => 'required',
+            'selfie'               => 'required|image',
             'receive_updates'      => 'required',
             'disney_on_ice'        => 'required_if:receive_updates,==,yes',
             'marvel_universe_live' => 'required_if:receive_updates,==,yes',
