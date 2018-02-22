@@ -5,7 +5,14 @@
 
 // Add an asterix after required form-group inputs
 .form-group.required .control-label:after {
-  content:"*";
-  color:red;
+  content: "*";
+  color: red;
   font-size: 1.5em;
+}
+
+// Constrain selfie image size - with more time, it would be useful to save a thumbnail fitted crop rather than
+// the generic cropped image made earlier.
+.selfie img {
+  height: 100px;
+  width: 100px;
 }

@@ -8,6 +8,10 @@
             <h1>Data Capture Form</h1>
         </div>
 
+        <a href="{{ route('form.index') }}" class="btn btn-block btn-success text-white mb-4">
+            View previously captured data
+        </a>
+
         @include('_messages')
 
         <form action="{{ route('form.store') }}"

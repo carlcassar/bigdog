@@ -12,5 +12,5 @@
 */
 
 Route::name('form.')->group(function () {
-    Route::resource('/', 'FormController')->only('index', 'show', 'store');
+    Route::resource('/', 'FormController')->only('index', 'create', 'store');
 });

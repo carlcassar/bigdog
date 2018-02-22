@@ -8,6 +8,11 @@
   font-size: 1.5em;
 }
 
+.selfie img {
+  height: 100px;
+  width: 100px;
+}
+
 /*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
  * Copyright 2011-2018 The Bootstrap Authors

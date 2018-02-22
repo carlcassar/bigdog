@@ -19,12 +19,12 @@ class FormController extends Controller
      */
     public function index()
     {
-        return view('form');
+        return view('index')->with('users', User::all());
     }
 
-    public function show()
+    public function create()
     {
-        //
+        return view('create');
     }
 
     /**
