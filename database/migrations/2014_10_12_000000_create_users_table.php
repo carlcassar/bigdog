@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->string('town_city')->default('');
             $table->string('county')->default('');
             $table->string('postcode')->default('');
-            $table->string('path')->default('');
             $table->boolean('disney_on_ice')->default(0);
             $table->boolean('marvel_universe_live')->default(0);
             $table->boolean('monster_jam')->default(0);

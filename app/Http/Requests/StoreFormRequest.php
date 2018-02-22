@@ -26,7 +26,7 @@ class StoreFormRequest extends FormRequest
         return [
             'first_name'           => 'required|min:2|max:50',
             'last_name'            => 'required|min:2|max:50',
-            'email'                => 'required|email|max:100',
+            'email'                => 'required|email|max:100|unique:users',
             'address'              => 'required|min:2|max:100',
             'county'               => 'required|min:2|max:100',
             'selfie'               => 'required',
