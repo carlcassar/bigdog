@@ -1,95 +1,116 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+    <title>BigDog Test</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    {{-- Styles--}}
+    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+    {{-- Fonts --}}
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
 
-            .full-height {
-                height: 100vh;
-            }
+    <div class="jumbotron">
+        <h1>Data Capture Form</h1>
+    </div>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+    <form>
+        {{-- First Name --}}
+        <div class="form-group required">
+            <label class="control-label" for="first_name">First Name</label>
+            <input type="text" class="form-control" id="first_name" placeholder="e.g. John" required>
+        </div>
 
-            .position-ref {
-                position: relative;
-            }
+        {{-- Last Name --}}
+        <div class="form-group required">
+            <label class="control-label" for="last_name">Last Name</label>
+            <input type="text" class="form-control" id="last_name" placeholder="e.g. Smith" required>
+        </div>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+        {{-- Email Address --}}
+        <div class="form-group required">
+            <label class="control-label" for="email">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="e.g. johnsmith@example.com" required>
+        </div>
 
-            .content {
-                text-align: center;
-            }
+        {{-- Telephone Number --}}
+        <div class="form-group">
+            <label class="control-label" for="telephone_number">Telephone Number</label>
+            <input type="text" class="form-control" id="telephone_number" placeholder="+44">
+        </div>
 
-            .title {
-                font-size: 84px;
-            }
+        {{-- Address --}}
+        <div class="form-group required">
+            <label class="control-label" for="address">Address</label>
+            <input type="text" class="form-control" id="address" placeholder="e.g. 4 Privet Drive" required>
+        </div>
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+        {{-- Town/City --}}
+        <div class="form-group">
+            <label class="control-label" for="town_city">Town / City </label>
+            <input type="text" class="form-control" id="town_city" placeholder="Little Whinging">
+        </div>
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
+        {{-- County --}}
+        <div class="form-group required">
+            <label class="control-label" for="county">County</label>
+            <input type="text" class="form-control" id="county" placeholder="Surrey" required>
+        </div>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+        {{-- Postcode --}}
+        <div class="form-group">
+            <label class="control-label" for="postcode">Postcode</label>
+            <input type="text" class="form-control" id="postcode" placeholder="WD25 7LR">
+        </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+        {{-- Upload Button --}}
+        <div class="form-group required">
+            <label class="control-label" for="selfie">Upload a selfie</label>
+            <input type="file" class="form-control" id="selfie" required>
+        </div>
+
+        {{-- Show / Hide Checkboxes --}}
+        <p>
+            Would you like to receive updates from us?
+            <a href="#">Yes</a> | <a href="#">No</a>
+        </p>
+
+        {{-- First Checkbox --}}
+        <div class="form-group required">
+            <div class="checkbox">
+                <label class="control-label">
+                    Yes, I'd like to receive updates and offers from Disney On Ice <input type="checkbox" required>
+                </label>
             </div>
         </div>
-    </body>
+
+        {{-- Second Checkbox --}}
+        <div class="form-group required">
+            <div class="checkbox">
+                <label class="control-label">
+                    Yes, I'd like to receive updates and offers from Marvel Universe LIVE! <input type="checkbox" required>
+                </label>
+            </div>
+        </div>
+
+        {{-- Last Checkbox --}}
+        <div class="form-group required">
+            <div class="checkbox">
+                <label class="control-label">
+                    Yes, I'd like to receive updates and offers from Monster Jam <input type="checkbox" required>
+                </label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+
+    </form>
+</div>
+</body>
 </html>
