@@ -43,6 +43,7 @@ class FormController extends Controller
             'town_city'            => $request->get('town_city'),
             'county'               => $request->get('county'),
             'postcode'             => $request->get('postcode'),
+            'receive_updates'      => $request->has('receive_updates'),
             'disney_on_ice'        => $request->has('disney_on_ice'),
             'marvel_universe_live' => $request->has('marvel_universe_live'),
             'monster_jam'          => $request->has('monster_jam'),
@@ -56,6 +57,10 @@ class FormController extends Controller
             ->save($this->makePath($user, $file, 'max_width_1024'))
             ->crop(150, 150)
             ->save($this->makePath($user, $file, 'cropped'));
+
+        if ($request->expectsJson()) {
+            return response('All user details were saved successfully');
+        }
 
         return back()->with('success', 'All user details were saved successfully');
     }

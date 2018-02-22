@@ -30,9 +30,10 @@ class StoreFormRequest extends FormRequest
             'address'              => 'required|min:2|max:100',
             'county'               => 'required|min:2|max:100',
             'selfie'               => 'required',
-            'disney_on_ice'        => 'required',
-            'marvel_universe_live' => 'required',
-            'monster_jam'          => 'required',
+            'receive_updates'      => 'required',
+            'disney_on_ice'        => 'required_if:receive_updates,==,yes',
+            'marvel_universe_live' => 'required_if:receive_updates,==,yes',
+            'monster_jam'          => 'required_if:receive_updates,==,yes',
         ];
     }
 }

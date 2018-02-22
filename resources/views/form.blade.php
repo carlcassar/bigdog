@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>BigDog Test</title>
 
@@ -14,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="container">
+<div class="container" id="app">
 
     <div class="jumbotron">
         <h1>Data Capture Form</h1>
@@ -30,14 +31,18 @@
                 @endforeach
             </ul>
         </div>
-
     @elseif(session()->has('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
 
-    <form action="" method="post" enctype="multipart/form-data">
+    <div id="ajax-messages"></div>
+
+    <form action="{{ route('form.store') }}"
+          id="data-capture-form"
+          method="post"
+          enctype="multipart/form-data">
 
         {{ csrf_field() }}
 
@@ -143,11 +148,12 @@
         {{-- Show / Hide Checkboxes --}}
         <p>
             Would you like to receive updates from us?
-            <a href="#">Yes</a> | <a href="#">No</a>
+            <label class="receive-updates radio-inline"><input type="radio" value="yes" name="receive_updates" required> Yes</label>
+            <label class="receive-updates radio-inline"><input type="radio" value="no" name="receive_updates" required> No</label>
         </p>
 
         {{-- First Checkbox --}}
-        <div class="form-group required">
+        <div class="form-group required update-type">
             <div class="checkbox">
                 <label class="control-label">
                     Yes, I'd like to receive updates and offers from Disney On Ice
@@ -159,7 +165,7 @@
         </div>
 
         {{-- Second Checkbox --}}
-        <div class="form-group required">
+        <div class="form-group required update-type">
             <div class="checkbox">
                 <label class="control-label">
                     Yes, I'd like to receive updates and offers from Marvel Universe LIVE!
@@ -171,7 +177,7 @@
         </div>
 
         {{-- Last Checkbox --}}
-        <div class="form-group required">
+        <div class="form-group required update-type">
             <div class="checkbox">
                 <label class="control-label">
                     Yes, I'd like to receive updates and offers from Monster Jam
@@ -182,9 +188,13 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="submit" id="submit-button" class="btn btn-success">Submit</button>
 
     </form>
 </div>
+
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 </html>

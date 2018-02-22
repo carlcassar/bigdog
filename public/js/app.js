@@ -13799,6 +13799,7 @@ module.exports = __webpack_require__(43);
  */
 
 __webpack_require__(13);
+__webpack_require__(48);
 
 window.Vue = __webpack_require__(36);
 
@@ -13829,10 +13830,16 @@ window.Popper = __webpack_require__(3).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(4);
+    window.$ = window.jQuery = __webpack_require__(4);
 
-  __webpack_require__(16);
+    __webpack_require__(16);
 } catch (e) {}
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -13853,9 +13860,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -47106,6 +47113,69 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */
+/***/ (function(module, exports) {
+
+$(function () {
+
+    $('.update-type').hide();
+    $(".update-type :input").prop('required', false);
+
+    $('.receive-updates').change(function (e) {
+
+        if ($(e.currentTarget).text() === ' Yes') {
+            $(".update-type :input").prop('required', true);
+
+            $('.update-type').show();
+        } else {
+            $(".update-type :input").prop('required', false);
+
+            $('.update-type').hide();
+        }
+    });
+
+    $("#data-capture-form").submit(function (e) {
+
+        e.preventDefault();
+
+        var formData = new FormData($(this)[0]);
+
+        $.ajax({
+            url: "/",
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            beforeSend: function beforeSend() {
+                $('#ajax-messages').empty();
+            },
+            success: function success(message) {
+                var success = $('<div class="alert alert-success"></div>');
+
+                success.append(message);
+
+                $('#ajax-messages').append(success);
+
+                $("#data-capture-form").hide();
+            },
+            error: function error(data) {
+                var errors = $('<div class="alert alert-danger"></div>');
+
+                $.each(data.responseJSON.errors, function (name, message) {
+                    errors.append(message);
+                });
+
+                $('#ajax-messages').append(errors);
+            }
+        });
+    });
+});
 
 /***/ })
 /******/ ]);

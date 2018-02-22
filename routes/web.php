@@ -11,4 +11,6 @@
 |
 */
 
-Route::resource('/', 'FormController')->only('index', 'show', 'store');
+Route::name('form.')->group(function () {
+    Route::resource('/', 'FormController')->only('index', 'show', 'store');
+});
