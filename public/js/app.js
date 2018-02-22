@@ -47125,53 +47125,49 @@ if (false) {
 $(function () {
 
     $('.update-type').hide();
-    $(".update-type :input").prop('required', false);
 
-    $('.receive-updates').change(function (e) {
-
-        if ($(e.currentTarget).text() === ' Yes') {
+    $('.receive-updates').change(function () {
+        if ($('input[name="receive_updates"]:checked').val() === 'Yes') {
             $(".update-type :input").prop('required', true);
-
             $('.update-type').show();
         } else {
             $(".update-type :input").prop('required', false);
-
             $('.update-type').hide();
         }
     });
 
     $("#data-capture-form").submit(function (e) {
+        var _this = this;
 
         e.preventDefault();
 
-        var formData = new FormData($(this)[0]);
+        var $ajaxMessages = $('#ajax-messages');
 
         $.ajax({
             url: "/",
             type: 'POST',
-            data: formData,
+            data: new FormData($(this)[0]),
             contentType: false,
             processData: false,
             beforeSend: function beforeSend() {
-                $('#ajax-messages').empty();
+                return $ajaxMessages.empty();
             },
             success: function success(message) {
-                var success = $('<div class="alert alert-success"></div>');
+                $ajaxMessages.append($('<div class="alert alert-success"></div>').append(message));
 
-                success.append(message);
-
-                $('#ajax-messages').append(success);
-
-                $("#data-capture-form").hide();
+                $(_this)[0].reset();
             },
             error: function error(data) {
                 var errors = $('<div class="alert alert-danger"></div>');
 
                 $.each(data.responseJSON.errors, function (name, message) {
-                    errors.append(message);
+                    errors.append('<p>' + message + '</p>');
                 });
 
                 $('#ajax-messages').append(errors);
+            },
+            complete: function complete() {
+                return $("html, body").animate({ scrollTop: 0 }, "slow");
             }
         });
     });

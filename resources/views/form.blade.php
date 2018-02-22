@@ -25,11 +25,9 @@
     @if ($errors->any())
         <div class="alert alert-danger">
             <h3>Oops, something doesn't check out.</h3>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+            @foreach ($errors->all() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
         </div>
     @elseif(session()->has('success'))
         <div class="alert alert-success">
@@ -148,8 +146,10 @@
         {{-- Show / Hide Checkboxes --}}
         <p>
             Would you like to receive updates from us?
-            <label class="receive-updates radio-inline"><input type="radio" value="yes" name="receive_updates" required> Yes</label>
-            <label class="receive-updates radio-inline"><input type="radio" value="no" name="receive_updates" required> No</label>
+            <label class="receive-updates radio-inline"><input type="radio" value="yes" name="receive_updates" required>
+                Yes</label>
+            <label class="receive-updates radio-inline"><input type="radio" value="no" name="receive_updates" required>
+                No</label>
         </p>
 
         {{-- First Checkbox --}}
@@ -157,9 +157,7 @@
             <div class="checkbox">
                 <label class="control-label">
                     Yes, I'd like to receive updates and offers from Disney On Ice
-                    <input type="checkbox"
-                           name="disney_on_ice"
-                           required>
+                    <input type="checkbox" name="disney_on_ice">
                 </label>
             </div>
         </div>
@@ -169,9 +167,7 @@
             <div class="checkbox">
                 <label class="control-label">
                     Yes, I'd like to receive updates and offers from Marvel Universe LIVE!
-                    <input type="checkbox"
-                           name="marvel_universe_live"
-                           required>
+                    <input type="checkbox" name="marvel_universe_live">
                 </label>
             </div>
         </div>
@@ -181,9 +177,7 @@
             <div class="checkbox">
                 <label class="control-label">
                     Yes, I'd like to receive updates and offers from Monster Jam
-                    <input type="checkbox"
-                           name="monster_jam"
-                           required>
+                    <input type="checkbox" name="monster_jam">
                 </label>
             </div>
         </div>

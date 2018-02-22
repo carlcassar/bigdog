@@ -1,17 +1,13 @@
 $(function () {
 
     $('.update-type').hide();
-    $(".update-type :input").prop('required', false);
 
-    $('.receive-updates').change(function (e) {
-
-        if ($(e.currentTarget).text() === ' Yes') {
+    $('.receive-updates').change(() => {
+        if ($('input[name="receive_updates"]:checked').val() === 'Yes') {
             $(".update-type :input").prop('required', true);
-
             $('.update-type').show();
         } else {
             $(".update-type :input").prop('required', false);
-
             $('.update-type').hide();
         }
     });
@@ -20,36 +16,30 @@ $(function () {
 
         e.preventDefault();
 
-        let formData = new FormData($(this)[0]);
+        let $ajaxMessages = $('#ajax-messages');
 
         $.ajax({
             url: "/",
             type: 'POST',
-            data: formData,
+            data: new FormData($(this)[0]),
             contentType: false,
             processData: false,
-            beforeSend: function() {
-                $('#ajax-messages').empty();
+            beforeSend: () => $ajaxMessages.empty(),
+            success: message => {
+                $ajaxMessages.append($('<div class="alert alert-success"></div>').append(message))
+
+                $(this)[0].reset();
             },
-            success: function (message) {
-                let success = $('<div class="alert alert-success"></div>');
-
-                success.append(message);
-
-                $('#ajax-messages').append(success);
-
-                $("#data-capture-form").hide();
-            },
-            error: function (data) {
+            error: data => {
                 let errors = $('<div class="alert alert-danger"></div>');
 
-                $.each(data.responseJSON.errors, function(name, message) {
-                   errors.append(message);
+                $.each(data.responseJSON.errors, function (name, message) {
+                    errors.append(`<p>${message}</p>`);
                 });
 
                 $('#ajax-messages').append(errors);
-            }
+            },
+            complete: () => $("html, body").animate({scrollTop: 0}, "slow")
         });
     });
-
 });
